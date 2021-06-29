@@ -63,7 +63,7 @@ Jira peut être aussi lié à Git pour lier les commits, les changements de code
 1. **Equipe Scrum**
 
     Généralement une équipe de 5 à 10 personnes qui ne change pas durant un sprint. Cette équipe comporte :
-    - **Product Owner** : représente le client. C'est lui qui définit les fonctionnalités du produit, choisit la date et le contenu des releases et est responsable du retour sur investissement. Il définit les priorités dans le backlog en fonctione de la valeur "métier" et il ajuste les fonctionnalités et les priorités de chaque sprint si nécessaire.
+    - **Product Owner** : représente le client. C'est lui qui définit les fonctionnalités du produit, choisit la date et le contenu des releases et est responsable du retour sur investissement. Il définit les priorités dans le backlog en fonctionne de la valeur "métier" et il ajuste les fonctionnalités et les priorités de chaque sprint si nécessaire.
     - **Scrum Master** : responsable de l'équipe Scrum qui veille au bon déroulement des itérations (délais...). Le Scrum Master gère le backlog avec le PO, et la bonne exécution des sprints. Il a plutôt un rôle de suivi.
     - **Team members** : représente les dev, les testeurs (MOA) et les DevOps si jamais il y en a.
 
@@ -72,7 +72,7 @@ Jira peut être aussi lié à Git pour lier les commits, les changements de code
 2. **Blocs de temps**
 
     - **Réunion de planification de la livraison** : sélection des tâches et de la durée du sprint si jamais elle change. Découper les US du backlog selon la durée du sprint.
-    - **Réunion de planification du sprint** : estimation du nombre de tâches totales en heures suivant le nombre de devs présents. Puis sélection des US à réaliser durant le sprint. Les estimations sont de plus en plus réalistes avec l'exp des dev et le temps.
+    - **Réunion de planification du sprint** : estimation du nombre de tâches totales en heures suivant le nombre de devs présents. Puis sélection des US à réaliser durant le sprint. Les estimations sont de plus en plus réalistes avec l'expérience des dev et le temps.
     - Le **sprint** en lui-même (cf. section suivante, Jira)
     - **Daily Meeting** : réunion chaque matin en étant debout présentant les remarques, problèmes de la veille et présenter les tâches du jour. Permet une bonne visibilité des tâches de chacun.
     A la fin du sprint, en fin de semaine :
@@ -86,6 +86,8 @@ Jira peut être aussi lié à Git pour lier les commits, les changements de code
     - Graphique de progression (burndown chart)
     - Graphique de progression de la livraison de la nouvelle version (release burndown chart)
     - Graphique de progression du sprint (sprint burndown chart)
+
+    ![burndown chart](https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/SampleBurndownChart.svg/1920px-SampleBurndownChart.svg.png)
 
     Quelques uns de ces graphiques sont disponibles dans Jira.
 
@@ -110,7 +112,7 @@ Accentuation sur :
 - livrer un logiciel fonctionnel et démonstration du résultat du sprint
 - planning adaptatif
 
-Les équipes Scrum font un peu de tout tout le temps entre exigences du projet (demandes du client ou SAD (Spécifications Avant Développement)), conception (problématiques), developpement du logiciel et enfin tests de la version (TU, TI, E2E, Acceptance Testing, Production Testing, API Testing...)
+Les équipes Scrum font un peu de tout tout le temps entre exigences du projet (demandes du client ou SAD (Spécifications Avant Développement)), conception (problématiques), développement du logiciel et enfin tests de la version (TU, TI, E2E, Acceptance Testing, Production Testing, API Testing...)
 
 ## Planification d'un projet
 
@@ -130,7 +132,9 @@ La planification initiale est affinée à chaque itération (sprint) en fonction
 
 - Le product owner effectue la gestion des besoins (product backlog), il faut toute la planification ainsi que l'estimation du temps
 - Le scrum master s'occupe de toute la gestion du projet dans sa globalité
-- La team écrit les recettes, et exécute les tests de recette. Les tests unitairs , le code et la conception sont aussi créés par l'équipe des dev
+- La team écrit les recettes, et exécute les tests de recette. Les tests unitaires , le code et la conception sont aussi créés par l'équipe des dev
+
+![responsabilités](https://image.slidesharecdn.com/oeildecoachscrumroles-et-responsabilitesv1-180326180740/95/oeildecoach-scrum-rolesetresponsabilites-3-638.jpg?cb=1534187827)
 
 ----------------------
 @author : Karine Dias
