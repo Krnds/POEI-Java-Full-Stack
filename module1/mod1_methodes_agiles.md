@@ -5,9 +5,11 @@
 - XP et Scrum sont les principales méthodes Agiles
 
 **User Stories** : les besoins du client
+
 Les US sont notées dans un logiciel de gestion de projet de type Jira par exmple.
 
 Implication du client et de l'équipe
+
 Meilleure gestion de l'équipe grâce à la communication entre le client et l'équipe de développement.
 
 Estimation du temps que prendra une tâche particulière.
@@ -24,7 +26,7 @@ Provient du *masnifeste Agile* publié en 2001 qui déploie 4 valeurs clefs :
 C'est un *concept*, une *méthode* de dev basé sur l'agilité.
 Un *projet informatique* est une demande émanant d'un client qui répond à un cahier de charges de fonctionnalités.
 
-- **Backlog du produit** : liste des fonctionnalitées demandées par le client, aka *User Stories* classée selon un ordre de priorité.
+- **Backlog du produit** : liste des fonctionnalitées demandées par le client classées selon un ordre de priorité.
 - **Product Owner** : c'est le *chef de projet* qui écrit les Users Stories à réaliser pour un sprint donné.
 - **Sprint** : itération ou phase de développement du logiciel, qui varie entre 1 et 4 semaines. A la fin de chaque sprint, on doit avoir une version du produit livrable qui a été testé et sans bugs. Une durée constante de sprint apporte un meilleur rythme.
 - **Daily meetings** : Mêlées quotidiennes ou *stand-up meetings*, réunion journalière où toute l'équipe présente à son tour ce qu'il a fait et ce qu'il va faire durant la journée. On peut aussi présenter ses problèmes rencontrés.
@@ -91,28 +93,11 @@ Jira peut être aussi lié à Git pour lier les commits, les changements de code
 
     Quelques uns de ces graphiques sont disponibles dans Jira.
 
-    ![vue générale](https://bubbleplan.net/blog/wp-content/uploads/2018/05/430.jpeg)
-
 4. **Les règles de Scrum**
 
 Liaison entre les blocs de temps, les rôles et les artéfacts.
 ex : seuls les membres de l'équipe peuvent prendre la parole durant les daily meetings.
 Tirer parti du sprint pour présenter ses problèmes rencontrés sans attendre de chercher longtemps par soi-même. Ne pas avoir honte de demander de l'aide aux dev séniors.
-
-### Conclusion de la méthodologie Scrum
-
-Scrum doit être conforme au principe m^mee de l'Agilité.
-Accentuation sur :
-
-- l'auto-organisation de l'équipe
-- pouvoir de décision donné à l'équipe
-- délais fixes
-- sprint en isolement
-- réunions quotidiennes
-- livrer un logiciel fonctionnel et démonstration du résultat du sprint
-- planning adaptatif
-
-Les équipes Scrum font un peu de tout tout le temps entre exigences du projet (demandes du client ou SAD (Spécifications Avant Développement)), conception (problématiques), développement du logiciel et enfin tests de la version (TU, TI, E2E, Acceptance Testing, Production Testing, API Testing...)
 
 ## Planification d'un projet
 
@@ -132,9 +117,26 @@ La planification initiale est affinée à chaque itération (sprint) en fonction
 
 - Le product owner effectue la gestion des besoins (product backlog), il faut toute la planification ainsi que l'estimation du temps
 - Le scrum master s'occupe de toute la gestion du projet dans sa globalité
-- La team écrit les recettes, et exécute les tests de recette. Les tests unitaires , le code et la conception sont aussi créés par l'équipe des dev
+- La team écrit les recettes, et exécute les tests de recette. Les tests unitaires, le code et la conception sont aussi créés par l'équipe des dev
 
 ![responsabilités](https://image.slidesharecdn.com/oeildecoachscrumroles-et-responsabilitesv1-180326180740/95/oeildecoach-scrum-rolesetresponsabilites-3-638.jpg?cb=1534187827)
+
+### Conclusion de la méthodologie Scrum
+
+Scrum doit être conforme au principe même de l'Agilité.
+Accentuation sur :
+
+- l'auto-organisation de l'équipe
+- pouvoir de décision donné à l'équipe
+- délais fixes
+- sprint en isolement
+- réunions quotidiennes
+- livrer un logiciel fonctionnel et démonstration du résultat du sprint
+- planning adaptatif
+
+Les équipes Scrum font un peu de tout tout le temps entre exigences du projet (demandes du client ou SAD (Spécifications Avant Développement)), conception (problématiques), développement du logiciel et enfin tests de la version (TU, TI, E2E, Acceptance Testing, Production Testing, API Testing...)
+
+![vue générale](https://bubbleplan.net/blog/wp-content/uploads/2018/05/430.jpeg)
 
 ----------------------
 @author : Karine Dias
