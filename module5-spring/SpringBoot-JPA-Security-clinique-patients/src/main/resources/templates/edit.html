@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Modification du patient</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style_list.css}"/>
+</head>
+<!--<form action="#" th:action="@{/edit/{id}}" th:object="${patient}" method="POST">-->
+<div th:replace="fragments/header :: header"></div>
+<form action="#" th:action="@{/edit/{id}(id=${patient.id})}" th:object="${patient}" method="POST">
+    <h1>Modify</h1>
+    <div class="patient-details">
+        <div><label>Nom*</label><input type="text" name="nom" placeholder="#{patient.nom.placeholder}" th:field="*{nom}"
+                                       required></div>
+        <div><label>Prénom*</label><input type="text" name="prenom" placeholder="#}"
+                                          th:field="*{prenom}" required></div>
+        <div><label>Email*</label><input type="email" name="email" placeholder="#{patient.email.placeholder}"
+                                         th:field="*{email}" required></div>
+        <div><label>Téléphone*</label><input type="tel" name="telephone" placeholder="#{patient.telephone.placeholder}"
+                                             th:field="*{telephone}" required></div>
+
+        <label>Ville*</label>
+        <div class="ville-block">
+            <select name="ville" id="ville">>
+                <div th:each="ville: ${villes}" class="ville">
+                    <option th:value="${{ville}}" th:text="${ville.nom}"></option>
+                    <!--                    <option value="${patient.ville}">-->
+                    <!--                   en haut erreur :/     En gros les choix des villes-->
+                    <td th:text="${ville.nom}">
+                        <input type="hidden" name="ville" placeholder="#{patient.ville?.nom.placeholder}"
+                               th:field="*{patient.ville}" required>
+                    </td>
+                    </option>
+                </div>
+            </select>
+
+        </div>
+    </div>
+    <button type="submit">Submit</button>
+</form>
+</div>
+</body>
+</html>

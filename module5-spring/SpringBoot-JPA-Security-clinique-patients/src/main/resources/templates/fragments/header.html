@@ -1,0 +1,61 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+        * {
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .logo {
+            /* center all elements horizontally */
+            display: flex;
+            justify-content: center;
+        }
+
+        img {
+            width: 10%;
+        }
+
+        h2 {
+            font-size: 24px;
+            text-transform: uppercase;
+            font-weight: 400;
+            position: absolute;
+            top: 25%;
+
+        }
+    </style>
+</head>
+
+<body>
+<header th:fragment="header">
+    <nav class="navbar navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" th:href="@{/all}">
+                <img src="/clinic_icon.jpg" alt="clinic-icon" width="50" class="d-inline-block align-text-top">
+                Clinique M2i
+            </a>
+            <a class="nav justify-content-normal">
+                <a class="nav-link active" aria-current="page" th:href="@{/add-new}">Ajouter Patient</a>
+            </a>
+            <a class="nav justify-content-normal">
+                <a class="nav-link active" aria-current="page" th:href="@{/users}">Utilisateurs</a>
+            </a>
+            <a class="nav justify-content-normal">
+                <a class="nav-link active" aria-current="page" th:href="@{/cities}">Villes</a>
+            </a>
+            <a class="nav justify-content-normal">
+                <button type="button" class="btn btn-outline-danger"><a style="text-decoration: none; color: black" href="/logout">Déconnexion</a></button>
+            </a>
+        </div>
+    </nav>
+</header>
+
+</body>
+
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style_list.css}"/>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+          rel="stylesheet">
+    <title>Document</title>
+</head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+<h1><span class="blue"></span>Patient database<span class="blue"></span> <span class="yellow"></span></h1>
+<p>Liste des patients</p>
+
+<table class="container">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Nom</th>
+        <th>Prenom</th>
+        <th>Email</th>
+        <th>Téléphone</th>
+        <th>Ville</th>
+        <th></th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="patient: ${patients}">
+        <td th:text="${patient.id}"/>
+        <td th:text="${patient.nom}"/>
+        <td th:text="${patient.prenom}"/>
+        <td th:text="${patient.email}"/>
+        <td th:text="${patient.telephone}"/>
+        <td th:text="${patient.ville?.nom}"/>
+        <td>
+
+            <a class="icon" th:href="@{/updateForm/{id}(id=${patient.id})}">
+                <span class="material-icons">edit</span>
+            </a>
+        </td>
+        <td>
+            <a class="icon" th:href="@{/delete/{id}(id=${patient.id})}">
+                <span class="material-icons">delete</span>
+            </a>
+        </td>
+    </tr>
+    </tbody>
+    </tr>
+</table>
+</body>
+</html>

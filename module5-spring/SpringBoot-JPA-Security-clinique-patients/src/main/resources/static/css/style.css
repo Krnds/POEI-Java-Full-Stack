@@ -1,0 +1,55 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+* {
+    font-family: 'Roboto', sans-serif;
+}
+
+
+.logo {
+    /* center all elements horizontally */
+    display: flex;
+    justify-content: left;
+}
+
+img {
+    width: 10%;
+}
+
+h2 {
+    font-size: 24px;
+    text-transform: uppercase;
+    font-weight: 500;
+    position: absolute;
+    top: 4%;
+    left: 7%;
+}
+
+
+/* CSS rules for Login page */
+
+#login-title {
+    text-transform: uppercase;
+    font-weight: 500;
+    position: initial;
+}
+
+.login-container {
+    display: flex;
+    flex-direction: column;
+    width: 10%;
+}
+
+.login-container button {
+    position: relative;
+    top: 15px;
+}
+
+.login-container button > a {
+    text-decoration: none;
+    color: black;
+}
+
+
+
+
+

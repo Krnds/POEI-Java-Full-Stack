@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Clinique - login</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+</head>
+<body>
+<h2 id="login-title">Bienvenue, veuillez vous authentifier</h2>
+
+<form name="formulaire" action="/login" method="POST">
+<!--    th:action="@{/all}"-->
+<!--    <form>-->
+    <div class="login-container">
+        <label>Username : </label>
+        <input type="text" placeholder="Enter Username" name="username" required>
+        <label>Password : </label>
+        <input type="password" placeholder="Enter Password" name="password" required>
+                <button type="submit">Login</button>
+
+<!--        <button type="submit"><a th:href="@{/all}">Login</a></button>-->
+    </div>
+</form>
+</body>
+</html>
