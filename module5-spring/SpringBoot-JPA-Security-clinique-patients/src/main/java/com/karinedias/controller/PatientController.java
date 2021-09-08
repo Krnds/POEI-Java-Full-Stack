@@ -2,9 +2,8 @@ package com.karinedias.controller;
 
 import com.karinedias.model.Patient;
 import com.karinedias.model.Ville;
-import com.karinedias.repository.PatientRepository;
-import com.karinedias.repository.VilleRepository;
 import com.karinedias.service.PatientService;
+import com.karinedias.service.VilleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
@@ -20,85 +19,68 @@ import java.util.Optional;
 @Secured("ROLE_ADMIN")
 public class PatientController {
 
-
 //    @Autowired
-//    private final PatientService patientService;
+    //TODO: tester sans field injection -> constructor injection
+    private final PatientService patientService;
+//    @Autowired
+    private final VilleService villeService;
 
-    private final PatientRepository patientRepo;
-    private final VilleRepository villeRepo;
-
-
-    public PatientController(PatientRepository patientRepo, VilleRepository villeRepo) {
-        this.patientRepo = patientRepo;
-        this.villeRepo = villeRepo;
+    @Autowired
+    public PatientController(PatientService patientService, VilleService villeService) {
+        this.patientService = patientService;
+        this.villeService = villeService;
     }
 
-    //LOGIN PAGE
     @GetMapping("/login")
     public String login() {
         return "login";
     }
 
-    // READ
+
     @Secured("ROLE_USER")
     @GetMapping("/all")
-    public String getAllPatients(Model model) {
-
-        List<Patient> patients = (List<Patient>) patientRepo.findAll();
-        model.addAttribute("patients", patients);
-        List<Ville> cities = (List<Ville>) villeRepo.findAll();
-        model.addAttribute("cities", cities);
-
+    public String getPatients(Model model) {
+        model.addAttribute("patients", patientService.findAll());
+        model.addAttribute("cities", villeService.findAll());
         return "getAll";
     }
 
-
-    // DELETE
-    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
-    public String deletePatient(@PathVariable String id, Model model) {
-        patientRepo.deleteById(Integer.parseInt(id));
-        model.addAttribute("patients", patientRepo.findAll());
+    @GetMapping("/delete/{id}")
+    public String deletePatient(@PathVariable int id) {
+        patientService.delete(id);
         return "redirect:/all";
     }
 
-
     // Form to Update
     @GetMapping("/updateForm/{id}")
-    public String showFormForUpdate(@PathVariable(value = "id") String id, Model model) {
+    public String showFormForUpdate(@PathVariable(value = "id") int id,  Model model) {
 
-        Optional<Patient> patient = patientRepo.findById(Integer.parseInt(id));
-// Pour avoir la liste des villes dans le formulaire
-        List<Ville> villes = (List<Ville>) villeRepo.findAll();
-        model.addAttribute("villes", villes);
-
-        // set employee as a model attribute to pre-populate the form
-        model.addAttribute("patient", patient.get()); //TODO: faire un if/else ?
-        // redirige vers la template edit.html
+        // Get list of cities for template form
+        model.addAttribute("villes", villeService.findAll());
+        // set patient as a model attribute to pre-populate the form
+        model.addAttribute("patient", patientService.findById(id));
         return "edit";
     }
 
 
     @PostMapping(value = "/edit/{id}")
-    public String addPatientPost(@PathVariable(name = "id") String id, HttpServletRequest request, Model model) {
+    public String updatePatient(@PathVariable(name = "id") int id, HttpServletRequest request, Model model) {
 
-        Optional<Patient> patientFound = patientRepo.findById(Integer.parseInt(id));
+        Patient patient = patientService.findById(id);
+
+        String nom = request.getParameter("nom");
+        String prenom = request.getParameter("prenom");
+        String email = request.getParameter("email");
+        String telephone = request.getParameter("telephone");
+        System.out.println("Paramètre ville = " + request.getParameter("ville"));
+        Ville ville = villeService.findById(Integer.valueOf(request.getParameter("ville")));
+        patientService.update(id, nom, prenom, email, telephone, ville);
+      //TODO: ????
+//        patientService.create(patient);
         // Pour avoir la liste des villes dans le formulaire
-        List<Ville> villes = (List<Ville>) villeRepo.findAll();
-        model.addAttribute("villes", villes);
-        try {
-            Patient p = patientFound.get();
-            p.setNom(request.getParameter("nom"));
-            p.setPrenom(request.getParameter("prenom"));
-            p.setEmail(request.getParameter("email"));
-            p.setTelephone(request.getParameter("telephone"));
-            Ville v = villeRepo.findById(Integer.valueOf(request.getParameter("ville"))).orElse(null);
-            p.setVille(v);
-            patientRepo.save(p);
-        } catch (Exception e) {
 
-            e.printStackTrace();
-        }
-
+        //TODO: pas besoin, si ?
+//        model.addAttribute("villes", villeService.findAll());
 
         return "redirect:/all";
     }
@@ -106,95 +88,16 @@ public class PatientController {
 
     @RequestMapping("/add-new")
     public String addNewPatient(Model model) {
-
-        List<Ville> villes = (List<Ville>) villeRepo.findAll();
-        model.addAttribute("villes", villes);
+        model.addAttribute("villes", villeService.findAll());
         return "create";
     }
 
-
-//    @PostMapping("/add")
-//    public String addPatient(@RequestBody Patient patient) {
-//        Patient newPatient = patientRepo.save(patient);
-//        System.out.println(newPatient.toString());
-//        Optional<Patient> addedPatient = Optional.of(patientRepo.save(patient));
-//        return "redirect:/all";
-//    }
-
-//    @PostMapping("/add")
-//    public String addPatient2(@Validated Patient patient, BindingResult result, Model model) {
-//        System.out.println("PATIENT ADDED : " + patient.toString());
-//
-//        patientRepo.save(patient);
-//        return "redirect:/all";
-//    }
-
-
-    // CREATE NEW PATIENT
-//    @GetMapping("/add")
-//    public String addPost(HttpServletRequest request) {
-//        System.out.println("Nom = " + request.getParameter("name"));
-//        try {
-//            Patient newPatient = new Patient();
-//            newPatient.setNom(request.getParameter("nom"));
-//            newPatient.setPrenom(request.getParameter("prenom"));
-//            newPatient.setEmail(request.getParameter("email"));
-//            newPatient.setTelephone(request.getParameter("telephone"));
-//            Ville v = villeRepo.findById(Integer.valueOf(request.getParameter("ville"))).orElse(null);
-//            newPatient.setVille(v);
-//            patientRepo.save(newPatient);
-//
-//        } catch (Exception ex) {
-//            ex.printStackTrace();
-//        }
-//        return "redirect:/all";
-//    }
-
-//    @GetMapping(value = "/add")
-//    public String addPatientGet(Model model) {
-//        model.addAttribute("nom", p.getNom());
-//        model.addAttribute("prenom", "prenom");
-//        model.addAttribute("email", "email");
-//        model.addAttribute("telephone", "Téléphone*");
-//        List<Ville> lv = (List<Ville>) villeRepo.findAll();
-//        model.addAttribute("villes", lv);
-//        Ville villeDefaut = villeRepo.findById(1).orElse(null);
-//        model.addAttribute("ville", villeDefaut);
-//        model.addAttribute("button_submit_text", "Ajouter patient");
-//        return "redirect:/all";
-//    }
-
-
-    // Taken from https://www.baeldung.com/spring-mvc-and-the-modelattribute-annotation
-//    @RequestMapping(value = "/add2", method = RequestMethod.GET)
-//    public String submit(
-//            @ModelAttribute("patient") Patient p,
-//            BindingResult result, Model model) {
-//        if (result.hasErrors()) {
-//            return "There was an error";
-//        }
-//        model.addAttribute("nom", p.getNom());
-//        model.addAttribute("prenom", p.getPrenom());
-//        model.addAttribute("email", p.getEmail());
-//        model.addAttribute("telephone", p.getTelephone());
-//        List<Ville> lv = (List<Ville>) villeRepo.findAll();
-//        model.addAttribute("villes", lv);
-//        Ville villeDefaut = villeRepo.findById(1).orElse(null);
-//        model.addAttribute("ville", villeDefaut);
-//        patientRepo.save(p);
-//        model.addAttribute("button_submit_text", "Ajouter patient");
-//        return "redirect:/patient/list";
-//
-//
-//
-//    }
-
-    // CREATE
     @PostMapping("/add")
     public String savePatient(@ModelAttribute("patient") Patient patient) {
-        patientRepo.save(patient);
+        patientService.create(patient);
         return "redirect:/all";
     }
 
 
 }
+
