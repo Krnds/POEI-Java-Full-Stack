@@ -19,10 +19,7 @@ import java.util.Optional;
 @Secured("ROLE_ADMIN")
 public class PatientController {
 
-//    @Autowired
-    //TODO: tester sans field injection -> constructor injection
     private final PatientService patientService;
-//    @Autowired
     private final VilleService villeService;
 
     @Autowired
@@ -75,12 +72,6 @@ public class PatientController {
         System.out.println("Paramètre ville = " + request.getParameter("ville"));
         Ville ville = villeService.findById(Integer.valueOf(request.getParameter("ville")));
         patientService.update(id, nom, prenom, email, telephone, ville);
-      //TODO: ????
-//        patientService.create(patient);
-        // Pour avoir la liste des villes dans le formulaire
-
-        //TODO: pas besoin, si ?
-//        model.addAttribute("villes", villeService.findAll());
 
         return "redirect:/all";
     }
