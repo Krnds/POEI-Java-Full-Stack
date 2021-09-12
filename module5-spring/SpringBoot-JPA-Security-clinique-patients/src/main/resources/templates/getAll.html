@@ -13,45 +13,49 @@
 </head>
 <body>
 <div th:replace="fragments/header :: header"></div>
-<h1><span class="blue"></span>Patient database<span class="blue"></span> <span class="yellow"></span></h1>
-<p>Liste des patients</p>
-<div class="container">
-<table class="table table-striped">
-    <thead>
-    <tr>
-        <th>ID</th>
-        <th>Nom</th>
-        <th>Prenom</th>
-        <th>Email</th>
-        <th>Téléphone</th>
-        <th>Ville</th>
-        <th></th>
-        <th></th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="patient: ${patients}">
-        <td th:text="${patient.id}"/>
-        <td th:text="${patient.nom}"/>
-        <td th:text="${patient.prenom}"/>
-        <td th:text="${patient.email}"/>
-        <td th:text="${patient.telephone}"/>
-        <td th:text="${patient.ville?.nom}"/>
-        <td>
-
-            <a class="icon" th:href="@{/updateForm/{id}(id=${patient.id})}">
-                <span class="material-icons">edit</span>
-            </a>
-        </td>
-        <td>
-            <a class="icon" th:href="@{/delete/{id}(id=${patient.id})}">
-                <span class="material-icons">delete</span>
-            </a>
-        </td>
-    </tr>
-    </tbody>
-    </tr>
-</table>
+<h3 class="text-center my-3">Liste des patients</h3>
+<div class="text-center">
+    <a class="btn btn-outline-info m-2" aria-current="page" th:href="@{/add-new}">Ajouter Patient</a>
 </div>
+<div class="container">
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nom</th>
+            <th>Prenom</th>
+            <th>Email</th>
+            <th>Téléphone</th>
+            <th>Ville</th>
+            <th></th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="patient: ${patients}">
+            <td th:text="${patient.id}"/>
+            <td th:text="${patient.nom}"/>
+            <td th:text="${patient.prenom}"/>
+            <td th:text="${patient.email}"/>
+            <td th:text="${patient.telephone}"/>
+            <td th:text="${patient.ville?.nom}"/>
+            <td>
+
+                <a class="icon" th:href="@{/updateForm/{id}(id=${patient.id})}">
+                    <span class="material-icons">edit</span>
+                </a>
+            </td>
+            <td>
+                <a class="icon" th:href="@{/delete/{id}(id=${patient.id})}">
+                    <span class="material-icons">delete</span>
+                </a>
+            </td>
+        </tr>
+        </tbody>
+        </tr>
+    </table>
+</div>
+<div th:replace="fragments/footer :: footer"></div>
 </body>
 </html>

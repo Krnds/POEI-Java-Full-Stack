@@ -11,40 +11,46 @@
 </head>
 <body>
 <div th:replace="fragments/header :: header"></div>
-<h1><span class="blue"></span>Liste des utilisateurs<span class="blue"></span> <span class="yellow"></span></h1>
+<h3 class="text-center my-3">Liste des utilisateurs</h3>
+<div class="text-center">
+    <a class="btn btn-outline-info m-2" aria-current="page" th:href="@{/users/add-new-user}">Ajouter Utilisateur</a>
+</div>
 
 <div class="container">
     <table class="table table-striped">
-    <thead>
-    <tr>
-        <th>ID</th>
-        <th>Identifiant</th>
-        <th>Email</th>
-        <th>Role</th>
-        <th></th>
-        <th></th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="user: ${users}" class="user">
-        <td th:text="${user.id}"/>
-        <td th:text="${user.username}"/>
-        <td th:text="${user.email}"/>
-        <td th:text="${user.roles}"/>
-        <td>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nom</th>
+            <th>Identifiant</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th></th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user: ${users}" class="user">
+            <td th:text="${user.id}"/>
+            <td th:text="${user.name}"/>
+            <td th:text="${user.username}"/>
+            <td th:text="${user.email}"/>
+            <td th:text="${user.roles}"/>
+            <td>
 
-            <a class="icon" th:href="@{/users/updateForm-user/{id}(id=${user.id})}">
-                <span class="material-icons">edit</span>
-            </a>
-        </td>
-        <td>
-            <a class="icon" th:href="@{/users/delete-user/{id}(id=${user.id})}">
-                <span class="material-icons">delete</span>
-            </a>
-        </td>
-    </tr>
-    </tbody>
-</table>
+                <a class="icon" th:href="@{/users/updateForm-user/{id}(id=${user.id})}">
+                    <span class="material-icons">edit</span>
+                </a>
+            </td>
+            <td>
+                <a class="icon" th:href="@{/users/delete-user/{id}(id=${user.id})}">
+                    <span class="material-icons">delete</span>
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
 </div>
+<div th:replace="fragments/footer :: footer"></div>
 </body>
 </html>

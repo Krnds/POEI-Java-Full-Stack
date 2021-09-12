@@ -29,28 +29,34 @@
             top: 25%;
 
         }
+        #clinic-name {
+            position: absolute;
+            top: 20px;
+            left: 90px;
+            font-weight: 600;
+        }
     </style>
 </head>
 
 <body>
 <header th:fragment="header">
-    <nav class="navbar navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
             <a class="navbar-brand" th:href="@{/all}">
                 <img src="/clinic_icon.jpg" alt="clinic-icon" width="50" class="d-inline-block align-text-top">
-                Clinique M2i
+                <div id="clinic-name">Clinique M2i</div>
             </a>
-            <a class="nav justify-content-normal">
-                <a class="nav-link active" aria-current="page" th:href="@{/add-new}">Ajouter Patient</a>
+            <a class="nav justify-content-around">
+                <a class="btn btn-outline-info" aria-current="page" th:href="@{/users/all}">Utilisateurs</a>
             </a>
-            <a class="nav justify-content-normal">
-                <a class="nav-link active" aria-current="page" th:href="@{/users}">Utilisateurs</a>
+            <a class="nav justify-content-around">
+                <a class="btn btn-outline-info" aria-current="page" th:href="@{/cities}">Villes</a>
             </a>
-            <a class="nav justify-content-normal">
-                <a class="nav-link active" aria-current="page" th:href="@{/cities}">Villes</a>
+            <a class="nav justify-content-around">
+                <a class="btn btn-outline-info" aria-current="page" href="#">Rendez-vous</a>
             </a>
-            <a class="nav justify-content-normal">
-                <button type="button" class="btn btn-outline-warning"><a style="text-decoration: none; color: black" href="/logout">Déconnexion</a></button>
+            <a class="nav justify-content-around">
+                <button type="button" class="btn btn-outline-warning"><a style="text-decoration: none; color: #505050" href="/logout">Déconnexion</a></button>
             </a>
         </div>
     </nav>

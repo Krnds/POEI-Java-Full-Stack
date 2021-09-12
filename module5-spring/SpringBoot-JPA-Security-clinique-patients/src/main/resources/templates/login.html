@@ -1,25 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Clinique - login</title>
     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <style>
+        .btn-primary {
+            color: #fff;
+            background-color: #1ba9b5;
+            border-color: #1ba9b5;
+        }
+    </style>
 </head>
+
 <body>
-<h2 id="login-title">Bienvenue, veuillez vous authentifier</h2>
+<div class="d-flex flex-column min-vh-100 justify-content-center align-items-center">
 
-<form name="formulaire" action="/login" method="POST">
-<!--    th:action="@{/all}"-->
-<!--    <form>-->
-    <div class="login-container">
-        <label>Username : </label>
-        <input type="text" placeholder="Enter Username" name="username" required>
-        <label>Password : </label>
-        <input type="password" placeholder="Enter Password" name="password" required>
-                <button type="submit">Login</button>
+    <div class="h-custom-2 px-5 ms-xl-4 mt-5 pt-5 pt-xl-0 mt-xl-n5">
 
-<!--        <button type="submit"><a th:href="@{/all}">Login</a></button>-->
+        <form style="width: 23rem;" name="formulaire" action="/login" method="POST">
+
+            <h3 class="fw-normal mb-2 pb-2 " style="letter-spacing: 1px;">
+                <div class="d-flex justify-content-center m-0">Bienvenue,</div>
+                <div class="d-flex justify-content-center m-0">veuillez vous authentifier</div>
+            </h3>
+
+            <div class="form-outline mb-2">
+                <input type="email" id="form2Example17" class="form-control form-control-lg"
+                       placeholder="adresse@mail.com" name="username" required/>
+                <label class="form-label" for="form2Example17">Username or e-mail</label>
+            </div>
+
+            <div class="form-outline mb-2">
+                <input type="password" id="form2Example27" class="form-control form-control-lg"
+                       placeholder="********" name="password" required/>
+                <label class="form-label" for="form2Example27">Mot de Passe</label>
+            </div>
+
+            <div class="pt-1 mb-2">
+                <div class="text-center">
+                    <button class="btn btn-primary btn-lg" type="submit">Login</button>
+                </div>
+            </div>
+        </form>
+
+
     </div>
-</form>
+</div>
 </body>
+
 </html>

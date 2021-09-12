@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Modification du patient</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style_list.css}"/>
+</head>
+
+<div th:replace="fragments/header :: header"></div>
+<div id="edit-container">
+    <form action="#" th:action="@{/users/edit-user/{id}(id=${user.id})}" th:object="${user}" method="POST">
+        <h3 class="text-center my-3">Modifier un utilisateur</h3>
+
+        <!-- <div class="d-flex justify-content-center align-items-center container "> -->
+            <div class="form-row d-flex justify-content-center align-items-center">
+                <div class="form-group col-md-3">
+                    <label>Nom*</label><input class="form-control" type="text" name="name"
+                                              placeholder="#{user.name.placeholder}"
+                                              th:field="*{name}"
+                                              required>
+                </div>
+                <div class="form-group col-md-3">
+                    <label>Nom d'utilisateur*</label><input class="form-control" type="text" name="username"
+                                                            placeholder="#{user.username.placeholder}"
+                                                            th:field="*{username}" required>
+                </div>
+            <!-- </div> -->
+        </div>
+
+            <div class="form-row d-flex justify-content-center align-items-center">
+
+                <div class="form-group col-md-3">
+                    <label>Email*</label>
+                    <input class="form-control" type="email" name="email" placeholder="#{user.email.placeholder}"
+                           th:field="*{email}"
+                           required>
+                </div>
+                <div class="form-group col-md-1">
+                    <label>Role*</label><input class="form-control" type="text" name="roles"
+                                               placeholder="#{user.roles.placeholder}"
+                                               th:field="*{roles}" required>
+                </div>
+                <div class="form-group col-md-3">
+                    <label>Mot de passe*</label><input class="form-control" type="password" name="password"
+                                                       value="disabled"
+                                                       disabled>
+                </div>
+
+        </div>
+
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+
+    </form>
+</div>
+<div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>

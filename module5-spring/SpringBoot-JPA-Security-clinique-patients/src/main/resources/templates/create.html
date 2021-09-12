@@ -8,45 +8,44 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/style_list.css}"/>
 </head>
 <div th:replace="fragments/header :: header"></div>
-
-<h1>Création d'un nouveau patient</h1>
+<h3 class="text-center my-3">Création d'un nouveau patient</h3>
 <div id="edit-container">
-<form action="#" th:action="@{/add}" th:object="${patient}" method="POST">
-    <div class="form-row">
-        <div class="form-group col-md-6">
-            <label>Nom*</label><input class="form-control" type="text" name="nom" required>
+    <form action="#" th:action="@{/add}" th:object="${patient}" method="POST">
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label>Nom*</label><input class="form-control" type="text" name="nom" required>
+            </div>
+            <div class="form-group col-md-6">
+                <label>Prénom*</label><input class="form-control" type="text" name="prenom" required>
+            </div>
         </div>
-        <div class="form-group col-md-6">
-            <label>Prénom*</label><input class="form-control" type="text" name="prenom" required>
-        </div>
-    </div>
 
-    <div class="form-row">
-        <div class="form-group col-md-6">
-            <label>Email*</label><input class="form-control" type="email" name="email" required>
-        </div>
-        <div class="form-group col-md-4">
-            <label>Téléphone*</label><input class="form-control" type="tel" name="telephone" required>
-        </div>
-        <div class="form-group col-md-2">
-            <label>Ville*</label>
-            <div class="ville-block">
-                <select class="custom-select" required name="ville" id="ville">
-                    <div th:each="ville: ${villes}" class="ville">
-                        <option th:value="${{ville}}" th:text="${ville.nom}"></option>
-                    </div>
-                </select>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label>Email*</label><input class="form-control" type="email" name="email" required>
+            </div>
+            <div class="form-group col-md-4">
+                <label>Téléphone*</label><input class="form-control" type="tel" name="telephone" required>
+            </div>
+            <div class="form-group col-md-2">
+                <label>Ville*</label>
+                <div class="ville-block">
+                    <select class="custom-select" required name="ville" id="ville">
+                        <div th:each="ville: ${villes}" class="ville">
+                            <option th:value="${{ville}}" th:text="${ville.nom}"></option>
+                        </div>
+                    </select>
+
+                </div>
 
             </div>
-
         </div>
-    </div>
 
-    <div class="text-center">
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </div>
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
 
-</form>
+    </form>
 </div>
 </body>
 </html>
