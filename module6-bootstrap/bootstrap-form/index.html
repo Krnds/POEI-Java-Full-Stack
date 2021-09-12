@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <link rel="<link rel=" stylesheet" , type="text/css" href="style.css">"
+  <title>Bootstrap Form Exercice</title>
+</head>
+
+<body>
+  <main class="container align-middle">
+    <form class="border p-3 mb-5 pb-5">
+      <nav class="navbar navbar-light bg-light position-relative container-fluid">
+        <span class="navbar-brand mb-0 h1">Personnes à assurer</span>
+      </nav>
+      <p class="text-secondary fw-bold mt-3 mb-3">Vous / Assuré 1</p>
+      </nav>
+      <form>
+        <div class="row">
+          <div class="col">
+            <button class="btn btn-outline-secondary dropdown-toggle form-control" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Civilité*</button>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="#">Action</a>
+              <a class="dropdown-item" href="#">Another action</a>
+              <a class="dropdown-item" href="#">Something else here</a>
+              <input type="text" class="form-control" placeholder="Civilité*">
+            </div>
+          </div>
+          <div class="col">
+            <input type="text" class="form-control" placeholder="Nom*">
+          </div>
+          <div class="col">
+            <input type="text" class="form-control" placeholder="Prénom*">
+          </div>
+          <p class="text-secondary mx-0 my-3 ">Date de naissance : 12/12/1985</p>
+        </div>
+        <div class="row">
+          <div class="col-md-5">
+            <div class="input-group mb">
+              <label class="sr-only" for="inlineFormInputGroup"></label>
+              <div class="input-group-prepend">
+                <div class="input-group-text">@</div>
+              </div>
+              <input type="text" class="form-control" id="inlineFormInputGroup" type="email" placeholder="E-mail*">
+              <p class="text-secondary d-inline-block small">(Pour recevoir un e-mail de confirmation)</p>
+            </div>
+          </div>
+          <div class="col-md-5">
+            <input type="text" class="form-control" placeholder="06 12 34 56 78">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <input type="text" class="form-control" id="inlineFormInputGroup" type="adress" placeholder="Adresse*">
+            <p class="text-secondary d-inline-block small">(Pour recevoir votre carte d'assuré)</p>
+          </div>
+
+          <div class="col-md-5">
+            <input type="text" class="form-control" placeholder="Ville*">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-3">
+            <input type="text" class="form-control" id="inlineFormInputGroup" type="postalCode" placeholder="C. Postal*">
+          </div>
+
+          <div class="col-md-3">
+            <input type="text" class="form-control" placeholder="Pays*">
+          </div>
+        </div>
+      </form>
+  </main>
+</body>
+
+</html>
