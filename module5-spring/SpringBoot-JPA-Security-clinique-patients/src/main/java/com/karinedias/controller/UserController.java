@@ -42,17 +42,7 @@ public class UserController {
     // Form to Update
     @GetMapping("/updateForm-user/{id}")
     public String showFormForUpdate(@PathVariable(value = "id") int id, Model model) {
-
-        // Get list of users for template form
-//        User user = userService.findById(id);
-//        model.addAttribute("username", user.getUsername());
-//        model.addAttribute("email", user.getEmail());
-//        model.addAttribute("role", user.getRoles());
-//        model.addAttribute("password", user.getPassword());
-//        model.addAttribute("name", user.getName());
-
         model.addAttribute("user", userService.findById(id));
-
         return "user/editUser";
     }
 
