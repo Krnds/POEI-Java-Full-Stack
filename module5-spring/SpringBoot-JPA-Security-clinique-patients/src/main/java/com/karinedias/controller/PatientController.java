@@ -74,13 +74,6 @@ public class PatientController {
         return "redirect:/all";
     }
 
-    //TODO: delete
-    @RequestMapping("/add-new")
-    public String addNewPatient(Model model) {
-        model.addAttribute("villes", villeService.findAll());
-        return "create";
-    }
-
     @PostMapping("/add")
     public String savePatient(@ModelAttribute("patient") Patient patient, Model model) {
         model.addAttribute("villes", villeService.findAll());

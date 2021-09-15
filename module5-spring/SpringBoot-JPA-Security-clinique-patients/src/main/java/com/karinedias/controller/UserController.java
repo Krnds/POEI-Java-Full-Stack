@@ -1,7 +1,6 @@
 package com.karinedias.controller;
 
 import com.karinedias.model.User;
-import com.karinedias.security.ApplicationConfig;
 import com.karinedias.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
@@ -27,8 +26,6 @@ public class UserController {
         this.encoder = encoder;
     }
 
-
-    // READ
     @Secured("ROLE_ADMIN")
     @GetMapping("/all")
     public String getAllUsers(Model model) {
@@ -62,13 +59,6 @@ public class UserController {
         userService.updateUser(id, username, email, role, user.getPassword(), name);
 
         return "redirect:/users/all";
-    }
-
-
-    @RequestMapping("/add-new-user")
-    public String addNewPatient(Model model) {
-        model.addAttribute("users", userService.findAll());
-        return "user/createUser";
     }
 
     @PostMapping("/add-user")

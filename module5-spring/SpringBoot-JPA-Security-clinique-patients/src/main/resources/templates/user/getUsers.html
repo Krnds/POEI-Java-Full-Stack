@@ -54,18 +54,13 @@
                             <label>Mot de passe*</label><input class="form-control" name="password" required type="password">
                         </div>
 
-<!--                        Ancienne manière de faire-->
-<!--                        <div class="form-group col-md-6">-->
-<!--                            <label>Role*</label><input class="form-control" name="role" required type="text">-->
-<!--                        </div>-->
-<!--Manière d'Amine-->
                         <div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" id="user" name="roles" value="ROLE_USER" th:checked="${as_user}">
+                                <input class="form-check-input" type="radio" id="user" name="roles" value="ROLE_USER"  th:checked="${as_user}" required>
                                 <label class="form-check-label" for="user">Utilisateur</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" id="admin" name="roles" value="ROLE_ADMIN" th:checked="${as_admin}">
+                                <input class="form-check-input" type="radio" id="admin"  name="roles" value="ROLE_ADMIN" th:checked="${as_admin}">
                                 <label class="form-check-label" for="admin">Administrateur</label>
                             </div>
                         </div>

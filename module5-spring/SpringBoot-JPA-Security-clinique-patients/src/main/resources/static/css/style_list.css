@@ -52,13 +52,23 @@ table, td {
 
 
 :root {
-    --title: #4dc3fa;
-    --bg-color: #FFFFFF;
-    --person-name: #ffcd89;
-    --column-name: #21789f;
     --cross-color: #1ba9b5;
-    --bubble-color: #92cd01;
-    --logo-dark-color: #0f8701;
+}
+
+.btn-outline-info {
+    border-color: var(--cross-color) !important;
+    color: black;
+    background-color: transparent;
+}
+
+.btn-outline-info:hover {
+    background-color: var(--cross-color) !important;
+}
+
+.btn-outline-info:active:focus, .btn-outline-info:active {
+    color: black;
+    background-color: var(--cross-color) !important;
+    border-color: #1b8fb5 !important;
 }
 
 
