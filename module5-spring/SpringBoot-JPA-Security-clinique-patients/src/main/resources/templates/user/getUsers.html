@@ -9,12 +9,76 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/style_list.css}"/>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
           rel="stylesheet">
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+
 </head>
 <body>
 <div th:replace="fragments/header :: header"></div>
 <h3 class="text-center my-3">Liste des utilisateurs</h3>
-<div class="text-center">
-    <a class="btn btn-outline-info m-2" aria-current="page" th:href="@{/users/add-new-user}">Ajouter Utilisateur</a>
+
+<!-- Button trigger modal -->
+<div class="d-inline-flex justify-content-center">
+    <button type="button" class="btn btn-outline-info m-2" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+        Ajouter utilisateur
+    </button>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Ajouter un nouvel utilisateur</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+<!--            <form action="#" method="POST" th:action="@{/users/add-user}" th:object="${user}">-->
+            <form th:action="@{/users/add-user}" th:object="${user}" method="POST" class="was-validated">
+            <div class="modal-body">
+
+                    <div class="form-group col-md-4">
+                        <label>Nom*</label><input class="form-control" name="name" required type="text">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label>Nom d'utilisateur*</label><input class="form-control" name="username" required type="text">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>Email*</label><input class="form-control" name="email" required type="email">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+
+                        <div class="form-group col-md-4">
+                            <label>Mot de passe*</label><input class="form-control" name="password" required type="password">
+                        </div>
+
+<!--                        Ancienne manière de faire-->
+<!--                        <div class="form-group col-md-6">-->
+<!--                            <label>Role*</label><input class="form-control" name="role" required type="text">-->
+<!--                        </div>-->
+<!--Manière d'Amine-->
+                        <div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" id="user" name="roles" value="ROLE_USER" th:checked="${as_user}">
+                                <label class="form-check-label" for="user">Utilisateur</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" id="admin" name="roles" value="ROLE_ADMIN" th:checked="${as_admin}">
+                                <label class="form-check-label" for="admin">Administrateur</label>
+                            </div>
+                        </div>
+                    </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                <button class="btn btn-primary" type="submit">Enregistrer</button>
+            </div>
+            </form>
+        </div>
+    </div>
 </div>
 
 <div class="container">

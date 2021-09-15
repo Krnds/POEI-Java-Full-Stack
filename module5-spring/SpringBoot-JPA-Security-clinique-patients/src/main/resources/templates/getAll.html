@@ -10,14 +10,78 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/style_list.css}"/>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
           rel="stylesheet">
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+
     <title>Document</title>
 </head>
 <body>
 <div th:replace="fragments/header :: header"></div>
 <h3 class="text-center my-3">Liste des patients</h3>
-<div class="text-center">
-    <a class="btn btn-outline-info m-2" aria-current="page" th:href="@{/add-new}">Ajouter Patient</a>
+<!--<div class="text-center">-->
+<!--    <a class="btn btn-outline-info m-2" aria-current="page" th:href="@{/add-new}">Ajouter Patient</a>-->
+<!--</div>-->
+
+<!-- Button trigger modal -->
+<div class="d-inline-flex justify-content-center">
+    <button type="button" class="btn btn-outline-info m-2" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+        Ajouter patient
+    </button>
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Ajouter un nouveau patient</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+                <form th:action="@{/add}" th:object="${patient}" method="POST" class="was-validated">
+                    <div class="modal-body">
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label>Nom*</label><input class="form-control" type="text" name="nom" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>Prénom*</label><input class="form-control" type="text" name="prenom" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label>Email*</label><input class="form-control" type="email" name="email" required>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>Téléphone*</label><input class="form-control" type="tel" name="telephone" required>
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label>Ville*</label>
+                            <div class="ville-block">
+                                <select class="custom-select" required name="ville" id="ville">
+                                    <div th:each="ville: ${cities}" class="ville">
+                                        <option th:value="${{ville}}" th:text="${ville.nom}"></option>
+                                    </div>
+                                </select>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                <button class="btn btn-primary" type="submit">Enregistrer</button>
+            </div>
+                </form>
+        </div>
+    </div>
+</div>
+
+
 <div class="container">
 
     <table class="table table-striped">

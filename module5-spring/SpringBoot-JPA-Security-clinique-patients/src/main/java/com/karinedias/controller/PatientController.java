@@ -11,8 +11,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
-import java.util.Optional;
 
 @Controller
 @RequestMapping("")
@@ -50,7 +48,7 @@ public class PatientController {
 
     // Form to Update
     @GetMapping("/updateForm/{id}")
-    public String showFormForUpdate(@PathVariable(value = "id") int id,  Model model) {
+    public String showFormForUpdate(@PathVariable(value = "id") int id, Model model) {
 
         // Get list of cities for template form
         model.addAttribute("villes", villeService.findAll());
@@ -76,7 +74,7 @@ public class PatientController {
         return "redirect:/all";
     }
 
-
+    //TODO: delete
     @RequestMapping("/add-new")
     public String addNewPatient(Model model) {
         model.addAttribute("villes", villeService.findAll());
@@ -84,7 +82,8 @@ public class PatientController {
     }
 
     @PostMapping("/add")
-    public String savePatient(@ModelAttribute("patient") Patient patient) {
+    public String savePatient(@ModelAttribute("patient") Patient patient, Model model) {
+        model.addAttribute("villes", villeService.findAll());
         patientService.create(patient);
         return "redirect:/all";
     }

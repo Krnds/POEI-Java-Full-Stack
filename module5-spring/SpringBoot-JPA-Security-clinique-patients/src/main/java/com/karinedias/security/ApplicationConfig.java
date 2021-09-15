@@ -32,7 +32,6 @@ public class ApplicationConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-
         // Activation de la page de login avec la route /login
         http.formLogin().loginPage("/login").defaultSuccessUrl("/all", true);
         http.authorizeRequests().antMatchers("/login", "/css/**").permitAll();

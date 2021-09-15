@@ -1,6 +1,7 @@
 package com.karinedias.controller;
 
 import com.karinedias.model.User;
+import com.karinedias.security.ApplicationConfig;
 import com.karinedias.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
@@ -13,15 +14,17 @@ import javax.servlet.http.HttpServletRequest;
 
 @Controller
 @RequestMapping("/users")
+@Secured("ROLE_ADMIN")
 public class UserController {
 
     private final UserService userService;
-//    @Autowired
-//    private final PasswordEncoder encoder;
+    @Autowired
+    private final PasswordEncoder encoder;
 
     @Autowired
-    public UserController(UserService userService) {
+    public UserController(UserService userService, PasswordEncoder encoder) {
         this.userService = userService;
+        this.encoder = encoder;
     }
 
 
@@ -36,7 +39,7 @@ public class UserController {
     @GetMapping("/delete-user/{id}")
     public String deleteUser(@PathVariable int id) {
         userService.deleteUser(id);
-        return "redirect:/all";
+        return "redirect:/users/all";
     }
 
     // Form to Update
@@ -55,13 +58,10 @@ public class UserController {
         String username = request.getParameter("username");
         String email = request.getParameter("email");
         String role = request.getParameter("roles");
-//        System.out.println("Password changé AVANT encodage = " + request.getParameter("password"));
-//        String password = encoder.encode(request.getParameter("password"));
-//        System.out.println("Password changé APRES encodage = " + password);
         String name = request.getParameter("name");
         userService.updateUser(id, username, email, role, user.getPassword(), name);
 
-        return "redirect:/all";
+        return "redirect:/users/all";
     }
 
 
@@ -72,9 +72,12 @@ public class UserController {
     }
 
     @PostMapping("/add-user")
-    public String savePatient(@ModelAttribute("user") User user) {
+    public String saveUser(@ModelAttribute("user") User user, Model model) {
+        // Save encrypted password in database
+        user.setPassword(encoder.encode(user.getPassword()));
+        model.addAttribute("as_admin", false);
         userService.addUser(user);
-        return "redirect:/all";
+        return "redirect:/users/all";
     }
 
 }
