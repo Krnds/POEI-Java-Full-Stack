@@ -21,7 +21,7 @@ h1 {
 }
 
 thead {
-    background: var(--cross-color);
+    background: var(--blue);
 }
 
 
@@ -33,7 +33,7 @@ body {
 
 
 .icon {
-    color: var(--cross-color);
+    color: var(--blue);
 }
 
 table, td {
@@ -52,23 +52,32 @@ table, td {
 
 
 :root {
-    --cross-color: #1ba9b5;
+    --blue: #1ba9b5;
 }
 
 .btn-outline-info {
-    border-color: var(--cross-color) !important;
+    border-color: var(--blue) !important;
     color: black;
     background-color: transparent;
 }
 
 .btn-outline-info:hover {
-    background-color: var(--cross-color) !important;
+    background-color: var(--blue) !important;
 }
 
 .btn-outline-info:active:focus, .btn-outline-info:active {
     color: black;
-    background-color: var(--cross-color) !important;
-    border-color: #1b8fb5 !important;
+    background-color: var(--blue) !important;
+    border-color: var(--blue) !important;
+}
+
+.input-group-append > span {
+    cursor: pointer;
+}
+
+.progress-bar {
+    background-color: var(--blue) !important;
+    color: white !important;
 }
 
 

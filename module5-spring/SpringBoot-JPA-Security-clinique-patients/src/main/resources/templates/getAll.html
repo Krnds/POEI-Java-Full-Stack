@@ -48,7 +48,7 @@
 
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label>Email*</label><input class="form-control" type="email" name="email" required>
+                            <label>Email*</label><input class="form-control" type="email" id="email" name="email" required>
                         </div>
                         <div class="form-group col-md-4">
                             <label>Téléphone*</label><input class="form-control" type="tel" name="telephone" required>
@@ -73,6 +73,30 @@
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
                 <button class="btn btn-primary" type="submit">Enregistrer</button>
             </div>
+
+                    <script>
+    function checkPatient() {
+
+    	console.log("doAjax");
+
+    	let xhr = new XMLHttpRequest();
+
+        xhr.onreadystatechange = function() {
+            // instructions of anonymous function
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                console.log(xhr.responseText);
+            }
+        };
+
+        let emailValue = document.getElementById('email').value;
+        xhr.open("GET", "/check?email="+emailValue, true);
+        xhr.send();
+    }
+
+    let emailInput = document.getElementById("email");
+    emailInput.onchange=checkPatient;
+
+    </script>
                 </form>
         </div>
     </div>
