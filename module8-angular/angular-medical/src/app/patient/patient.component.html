@@ -1,0 +1,109 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<body>
+    <div th:replace="fragments/header :: header"></div>
+    <h3 class="text-center my-3">Liste des patients</h3>
+
+    <!-- Button trigger modal -->
+    <div class="d-inline-flex justify-content-center">
+        <button type="button" class="btn btn-outline-info m-2" data-bs-toggle="modal" data-bs-target="#addPatientModal">
+            Ajouter patient
+        </button>
+    </div>
+    <!-- Modal for adding a new patient -->
+    <div class="modal fade" id="addPatientModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <form name="patientForm" method="POST" (submit)="submitForm()">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title center" id="exampleModalLabel">Ajouter un patient</h5>
+                        <!-- Le #closebutton sert à la requête viewChild de cet élément : -->
+                        <button type="button" #closebutton class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-row">
+                            <div class="form-group form-floating mb-3">
+                                <input class="form-control" id="lastname" name="nom" type="text" placeholder="Nom" required
+                                    [(ngModel)]="newPatient.nom">
+                                <label for="lastname">Nom*</label>
+                                <!-- TODO: custom messages pour la validation -->
+                                <!-- <div class="invalid-feedback">
+                                    Please choose a username.
+                                  </div> -->
+                            </div>
+                            <div class="form-group form-floating mb-3">
+                                <input class="form-control" id="firstname" name="prenom" type="text" placeholder="Prénom" required
+                                    [(ngModel)]="newPatient.prenom">
+                                <label for="firstname">Prénom*</label>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group form-floating mb-3">
+                                <input class="form-control" id="email" name="email" type="email" placeholder="email@company.com"
+                                    required [(ngModel)]="newPatient.email">
+                                <label for="email">Email*</label>
+                            </div>
+                            <div class="form-group form-floating mb-3">
+                                <input class="form-control" id="telephone" name="telephone" type="tel" placeholder="0123456789" required
+                                    [(ngModel)]="newPatient.telephone">
+                                <label for="telephone">Téléphone*</label>
+                            </div>
+                            <div class="form-group form-floating mb-3">
+                                    <select class="form-select" required name="ville" name="ville" id="ville" [(ngModel)]="newPatient.ville">
+                                        <option value="">Choisissez la ville</option>
+                                        <option *ngFor="let ville of villes" [ngValue]="ville">{{ville.nom}}</option>
+                                    </select>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="reset" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                        <button class="btn btn-primary" type="submit" id="submitForm">Enregistrer</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nom</th>
+                    <th>Prenom</th>
+                    <th>Email</th>
+                    <th>Téléphone</th>
+                    <th>Ville</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let patient of patients">
+                    <td>{{patient.id}}</td>
+                    <td>{{patient.nom}}</td>
+                    <td>{{patient.prenom}}</td>
+                    <td>{{patient.email}}</td>
+                    <td>{{patient.telephone}}</td>
+                    <td>{{patient.ville?.nom}}</td>
+                    <td>
+
+                        <a class="icon" (click)="editPatient(patient.id)" data-bs-toggle="modal" data-bs-target="#editPatientModal">
+                            <span class="material-icons">edit</span>
+                        </a>
+                    </td>
+                    <td>
+                        <a class="icon" (click)="deletePatient(patient.id)">
+                            <span class="material-icons">delete</span>
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
