@@ -128,20 +128,95 @@
             <td th:text="${patient.ville?.nom}"/>
             <td>
 
-                <a class="icon" th:href="@{/updateForm/{id}(id=${patient.id})}">
-                    <span class="material-icons">edit</span>
+                <a class="icon" th:href="@{/updateForm/{id}(id=${patient.id})}" data-bs-toggle="modal" data-bs-target="#editModal">
+<!--                    <a class="icon" href="#editModal" data-bs-toggle="modal" data-bs-target="#editModal" th:action="@{/updateForm/{id}(id=${patient.id})}">-->
+<!--                    <a class="icon" data-bs-toggle="modal" data-bs-target="#editModal" th:href="@{/updateForm/{id}(id=${patient.id})}" th:attr="data-bs-target='#editModal'+${patient.id}">-->
+<!--                <a class="icon" data-bs-toggle="modal" href="#" data-bs-target="#editModal"  th:attr="data-bs-target='#editModal'+${patient.id}">-->
+<!--                   <a class="icon" data-bs-toggle="modal" th:href="@{/updateForm/{id}(id=${patient.id})}" data-bs-target="#editModal" th:attr="data-object-id=''+${patient.id}+'', data-object-name='/updateForm/'+${patient.id}+'', data-target='#editModal'">-->
+                    <span class="material-icons pe-none">edit</span>
                 </a>
+
             </td>
+
+
             <td>
                 <a class="icon" th:href="@{/delete/{id}(id=${patient.id})}">
                     <span class="material-icons">delete</span>
                 </a>
             </td>
+
+
         </tr>
         </tbody>
-        </tr>
     </table>
+
 </div>
+
+<!--<div class="modal fade" id="editModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">-->
+<!--    <div class="modal-dialog">-->
+<!--        <div class="modal-content">-->
+<!--            <div class="modal-header">-->
+<!--                <h5 class="modal-title" id="editModalLabel">Modifier le patient</h5>-->
+<!--                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
+<!--            </div>-->
+
+<!--            <form th:action="@{/edit/{id}(id=${patient.id})}" th:object="${patient}" method="POST" class="was-validated">-->
+<!--                <div class="modal-body">-->
+<!--                    <div class="form-row">-->
+<!--                        <div class="form-group col-md-6">-->
+<!--                            <label>Nom*</label><input class="form-control" type="text" name="nom"-->
+<!--                                                      placeholder="#{patient.nom.placeholder}"-->
+<!--                                                      th:field="*{nom}"-->
+<!--                                                      required>-->
+<!--                        </div>-->
+<!--                        <div class="form-group col-md-6">-->
+<!--                            <label>Prénom*</label><input class="form-control" type="text" name="prenom" placeholder="#}"-->
+<!--                                                         th:field="*{prenom}" required>-->
+<!--                        </div>-->
+<!--                    </div>-->
+
+
+<!--                    <div class="form-row">-->
+<!--                        <div class="form-group col-md-6">-->
+<!--                            <label>Email*</label>-->
+<!--                            <input class="form-control" type="email" name="email" placeholder="#{patient.email.placeholder}"-->
+<!--                                   th:field="*{email}"-->
+<!--                                   required>-->
+<!--                        </div>-->
+<!--                        <div class="form-group col-md-4">-->
+<!--                            <label>Téléphone*</label><input class="form-control" type="tel" name="telephone"-->
+<!--                                                            placeholder="#{patient.telephone.placeholder}"-->
+<!--                                                            th:field="*{telephone}" required>-->
+<!--                        </div>-->
+
+
+<!--                        <div class="form-group col-md-2">-->
+<!--                            <label>Ville*</label>-->
+<!--                            <select class="custom-select" required name="ville" id="ville">-->
+<!--                                <div th:each="ville: ${villes}" class="ville">-->
+<!--                                    <option th:value="${{ville}}" th:text="${ville.nom}"></option>-->
+<!--                                    <td th:text="${ville.nom}">-->
+<!--                                        <input class="form-control" type="hidden" name="ville"-->
+<!--                                               placeholder="#{patient.ville?.nom.placeholder}"-->
+<!--                                               th:field="*{ville}" required>-->
+<!--                                    </td>-->
+<!--                                    </option>-->
+<!--                                </div>-->
+<!--                            </select>-->
+
+<!--                        </div>-->
+
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="modal-footer">-->
+<!--                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>-->
+<!--                    <button class="btn btn-primary" type="submit">Enregistrer</button>-->
+<!--                </div>-->
+<!--            </form>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+
 <div th:replace="fragments/footer :: footer"></div>
 </body>
 </html>

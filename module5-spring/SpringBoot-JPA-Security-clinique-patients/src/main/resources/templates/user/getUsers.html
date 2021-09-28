@@ -103,6 +103,34 @@
     </div>
 </div>
 
+<script>
+    function checkPatient() {
+
+    	console.log("Checking patient");
+
+    	let xhr = new XMLHttpRequest();
+
+        xhr.onreadystatechange = function() {
+            // instructions of anonymous function
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                if( xhr.responseText.length > 0 ){ // cas d'erreur
+                	document.getElementById('message').innerHTML = '<div class="alert alert-danger">'+xhr.responseText+'</div>';
+                }else{ // sans erreur
+                	document.getElementById('message').innerHTML = '';
+                }
+            }
+        };
+
+        let emailValue = document.getElementById('email').value;
+        xhr.open("GET", "/check?email="+emailValue, true);
+        xhr.send();
+    }
+
+    let emailInput = document.getElementById("email");
+    emailInput.onchange=checkPatient;
+
+    </script>
+
 <script src="/js/script.js"></script>
 
 <div class="container">

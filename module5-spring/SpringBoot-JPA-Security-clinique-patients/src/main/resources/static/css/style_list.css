@@ -71,7 +71,7 @@ table, td {
     border-color: var(--blue) !important;
 }
 
-.input-group-append > span {
+.input-group-append > span, .material-icons {
     cursor: pointer;
 }
 

@@ -31,6 +31,10 @@ public class PatientService {
         return patientRepo.findById(id).get();
     }
 
+    public Patient findByEmail(String email) {
+        return patientRepo.findByEmail(email);
+    }
+
     public Patient update(int id, String nom, String prenom, String email, String telephone, Ville ville) {
         Patient patient = patientRepo.findById(id).orElseThrow(() -> new EntityNotFoundException
                 ("Patient not found with: id" + id));

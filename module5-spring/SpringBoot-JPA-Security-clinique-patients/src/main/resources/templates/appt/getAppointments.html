@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style_list.css}"/>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+          rel="stylesheet">
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+
+    <title>All appointments</title>
+</head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+<h3 class="text-center my-3">Liste des rendez-vous</h3>
+
+<!-- Button trigger modal -->
+<div class="d-inline-flex justify-content-center">
+    <button type="button" class="btn btn-outline-info m-2" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+        Ajouter un rendez-vous
+    </button>
+</div>
+
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Ajouter un nouveau RDV</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <form th:action="@{/rdv/add}" th:object="${rdv}" method="POST" class="was-validated">
+                <div class="modal-body">
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label>Id patient*</label><input class="form-control" type="text" name="idPatient" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>Date*</label><input class="form-control" type="datetime-local" name="date" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label>Type de RDV*</label><input class="form-control" type="text" id="type" name="type" required>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>Durée du RDV*</label><input class="form-control" type="number" name="duration" required>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>Notes*</label><input class="form-control" type="text" name="note" required>
+
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                    <button class="btn btn-primary" type="submit">Enregistrer</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<div class="container">
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Numéro Patient</th>
+            <th>Nom Patient</th>
+            <th>Date du RDV</th>
+            <th>Type de RDV</th>
+            <th>Durée du RDV (minutes)</th>
+            <th>Notes sur le RDV</th>
+            <th></th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="r: ${rdv}">
+            <td th:text="${r.id}"/>
+            <td th:text="${r.idPatient.id}"/>
+            <td th:text="${r.idPatient.nom}"/>
+            <td th:text="${r.date}"/>
+            <td th:text="${r.type}"/>
+            <td th:text="${r.duration}"/>
+            <td th:text="${r.note}"/>
+            <td>
+
+                <a class="icon" th:href="@{/rdv/updateForm/{id}(id=${r.id})}">
+                    <span class="material-icons">edit</span>
+                </a>
+            </td>
+            <td>
+                <a class="icon" th:href="@{/rdv/delete/{id}(id=${r.id})}">
+                    <span class="material-icons">delete</span>
+                </a>
+            </td>
+        </tr>
+        </tbody>
+        </tr>
+    </table>
+</div>
+<div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>

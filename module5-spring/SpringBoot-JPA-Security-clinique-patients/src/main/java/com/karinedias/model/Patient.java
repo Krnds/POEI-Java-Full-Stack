@@ -75,8 +75,7 @@ public class Patient {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Patient)) return false;
-        Patient patient = (Patient) o;
+        if (!(o instanceof Patient patient)) return false;
         return id == patient.id && nom.equals(patient.nom) && prenom.equals(patient.prenom) && email.equals(patient.email) && telephone.equals(patient.telephone) && ville.equals(patient.ville);
     }
 
