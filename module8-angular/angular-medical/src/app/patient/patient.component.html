@@ -1,17 +1,17 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-<!-- <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js" integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script> -->
+
 <body>
-    <div th:replace="fragments/header :: header"></div>
+    <div class="alert alert-sucess" *ngIf="success">Opération effectuée avec succès</div>
     <h3 class="text-center my-3">Liste des patients</h3>
 
     <!-- Button trigger modal -->
     <div class="d-inline-flex justify-content-center">
-        <button type="button" class="btn btn-outline-info m-2" data-bs-toggle="modal" data-bs-target="#addPatientModal">
+        <button type="button" class="btn btn-outline-info m-2" data-bs-toggle="modal" data-bs-target="#patientModal">
             Ajouter patient
         </button>
     </div>
     <!-- Modal for adding a new patient -->
-    <div class="modal fade" id="addPatientModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="patientModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
         <div class="modal-dialog">
             <form name="patientForm" method="POST" (submit)="submitForm()">
                 <div class="modal-content">
@@ -108,12 +108,12 @@
                 </tr>
             </tbody>
         </table>
-
     </div>
+
     <!-- Modal for updating a patient -->
-    <div class="modal fade" id="editPatientModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="editPatientModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
         <div class="modal-dialog">
-            <form name="editPatientForm" method="PUT" (submit)="editPatient()">
+            <form name="editPatientForm" method="POST" (submit)="submitForm()">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title center" id="exampleModalLabel">Modifier un patient</h5>
@@ -152,8 +152,8 @@
                             </div>
                             <div class="form-group form-floating mb-3">
                                 <select class="form-select" required name="ville" name="ville" id="ville"
-                                    [(ngModel)]="newPatient.ville">
-                                    <option value="" selected>{{currentVille}}</option>
+                                    [(ngModel)]="newPatient.ville" [compareWith]="comparePatientCity">
+                                    <label for="ville">{{currentVille}}</label>
                                     <option *ngFor="let ville of villes" [ngValue]="ville">{{ville.nom}}</option>
                                 </select>
                             </div>
@@ -161,6 +161,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="reset" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                        <!-- TODO: le bouton submit ne ferme pas la modal ? -->
                         <button class="btn btn-primary" type="submit" id="submitForm">Enregistrer</button>
                     </div>
                 </div>

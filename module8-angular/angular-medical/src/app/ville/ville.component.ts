@@ -1,14 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpClientModule } from '@angular/common/http';
 import { Ville } from '../classes/ville';
-import { environment } from 'src/environments/environment';
-
-const httpOptions = {
-  headers: new HttpHeaders({
-    // 'Access-Control-Allow-Origin':'*',
-    'Authorization': 'Basic ' + environment.basicAuth
-  })
-}
+import { VilleService } from '../service/ville.service';
 
 @Component({
   selector: 'app-ville',
@@ -22,28 +15,53 @@ export class VilleComponent implements OnInit {
   newVille : Ville = new Ville();
   @ViewChild ('closebutton') closebuttonelement : any;
 
-  constructor( private http : HttpClient ) { }
+  constructor( private vs : VilleService ) { }
 
   ngOnInit(): void {
-
-    this.updateCities()
+    this.loadCities();
   }
 
-  updateCities() : void {
-    this.http.get<Ville[]>(environment.baseUrl  + "ville" ,
-    httpOptions ).subscribe(
-     data => {
-       this.villes = data;
-       console.log( data );
-     }
-   );
+  loadCities(): void {
+    this.vs.loadCities().subscribe(data => {
+      this.villes = data;
+      console.log(data);
+    });
   }
 
-  submitForm() : void {
-    console.log( this.newVille );
-    this.http.post<Ville>(environment.baseUrl + "ville" , this.newVille , httpOptions ).subscribe(
-      data => { console.log( data ); this.updateCities() }
-    )
+  editCity(id?: number): void {
+    this.vs.getVille(id).subscribe(data => {
+      this.newVille = data;
+      console.log(this.newVille);
+      this.loadCities();
+      //TODO: add this.success = true;
+    })
+  }
+
+  deleteCity(id?: number): void {
+    if (confirm ("etes vous surs ?")) {
+      this.vs.deleteVille(id).subscribe(data => {
+        this.loadCities();
+      })
+    }
+  }
+
+  submitForm(): void {
+    if (this.newVille.id == undefined) {
+      this.vs.addVille(this.newVille).subscribe(data => {
+        console.log(data);
+        this.closebuttonelement.nativeElement.click();
+        this.loadCities();
+        //TODO: add this.success = true;
+      })
+    } else {
+      this.vs.editVille(this.newVille).subscribe(data => {
+        console.log(data);
+        this.closebuttonelement.nativeElement.click();
+        this.loadCities();
+        //TODO: add this.success = true;
+      })
+    }
+
   }
 
 }

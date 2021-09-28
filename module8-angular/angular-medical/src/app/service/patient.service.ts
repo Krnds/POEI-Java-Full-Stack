@@ -31,10 +31,11 @@ export class PatientService {
   }
 
   editPatient(patient : Patient) : Observable<Patient> {
+    console.log("edit patients service called");
     return this.http.put<Patient>(environment.baseUrl + "patient/update/" + patient.id, patient, HttpOptions);
   }
 
-  deletePatient(id? : number) : Observable<Patient> {
+  deletePatient(id? : number) : Observable<any> { //TODO: observable de patient ou any ???
     console.log("service delete patient");
 
     return this.http.delete<Patient>(environment.baseUrl + "patient/delete/" + id, HttpOptions);

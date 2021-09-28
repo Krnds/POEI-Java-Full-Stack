@@ -25,10 +25,10 @@ export class VilleService {
   }
 
   editVille(ville : Ville) : Observable<Ville> {
-    return this.http.put<Ville>(environment.baseUrl + "ville/" + ville.id, ville, HttpOptions);
+    return this.http.put<Ville>(environment.baseUrl + "ville/update/" + ville.id, ville, HttpOptions);
   }
 
   deleteVille(id? : number) : Observable<Ville> {
-    return this.http.delete<Ville>(environment.baseUrl + "ville/" + id, HttpOptions);
+    return this.http.delete<Ville>(environment.baseUrl + "ville/delete/" + id, HttpOptions);
   }
 }

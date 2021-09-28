@@ -1,17 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Patient } from '../classes/patient';
-import { environment } from 'src/environments/environment';
 import { Ville } from '../classes/ville';
 import { PatientService } from '../service/patient.service';
-
-
-// const httpOptions = {
-//   headers: new HttpHeaders({
-//     // 'Access-Control-Allow-Origin':'*',
-//     'Authorization': 'Basic ' + environment.basicAuth
-//   })
-// }
 
 @Component({
   selector: 'app-patient',
@@ -25,6 +16,7 @@ export class PatientComponent implements OnInit {
   patients: Array<Patient> = [];
   villes: Array<Ville> = [];
   @ViewChild('closebutton') closebuttonelement: any;
+  success: boolean = false;
 
   constructor(private ps: PatientService) { }
 
@@ -57,14 +49,12 @@ export class PatientComponent implements OnInit {
     this.ps.getPatient(id).subscribe(data => {
       this.newPatient = data;
       this.currentVille = this.newPatient.ville?.nom;
-      console.log(this.newPatient);
-      //TODO: test update après edit d'un patient
       this.loadPatients();
+      this.success = true;
     })
   }
 
   deletePatient(id?: number): void {
-    console.log("méthode delete patient");
     this.ps.deletePatient(id).subscribe(data => {
       this.loadPatients();
     })
@@ -76,15 +66,22 @@ export class PatientComponent implements OnInit {
         console.log(data);
         this.closebuttonelement.nativeElement.click();
         this.loadPatients();
+        this.success = true;
       })
     } else {
       this.ps.editPatient(this.newPatient).subscribe(data => {
+        console.log("submit form si id reconnu");
         console.log(data);
         this.closebuttonelement.nativeElement.click();
         this.loadPatients();
+        this.success = true;
       })
     }
 
+  }
+
+  comparePatientCity(v1 : Ville, v2 : Ville): boolean {
+    return v1 != undefined && v2 != undefined && v1.id == v2.id;
   }
 
 }
