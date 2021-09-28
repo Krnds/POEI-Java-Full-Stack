@@ -3,6 +3,7 @@ import { environment } from "src/environments/environment";
 
 export const HttpOptions = {
      headers : new HttpHeaders({
-         'Authorization' : environment.baseUrl
+      'Access-Control-Allow-Origin':'*',
+      'Authorization': 'Basic ' + environment.basicAuth
      })
 }

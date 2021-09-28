@@ -3,13 +3,15 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Patient } from '../classes/patient';
 import { environment } from 'src/environments/environment';
 import { Ville } from '../classes/ville';
+import { PatientService } from '../service/patient.service';
 
-const httpOptions = {
-  headers: new HttpHeaders({
-    // 'Access-Control-Allow-Origin':'*',
-    'Authorization': 'Basic ' + environment.basicAuth
-  })
-}
+
+// const httpOptions = {
+//   headers: new HttpHeaders({
+//     // 'Access-Control-Allow-Origin':'*',
+//     'Authorization': 'Basic ' + environment.basicAuth
+//   })
+// }
 
 @Component({
   selector: 'app-patient',
@@ -24,75 +26,65 @@ export class PatientComponent implements OnInit {
   villes: Array<Ville> = [];
   @ViewChild('closebutton') closebuttonelement: any;
 
-  constructor(private http: HttpClient) { }
+  constructor(private ps: PatientService) { }
 
   ngOnInit(): void {
-
-    console.log(this.newPatient);
     // On initialization of Patient Component, call loadPatient
     this.loadPatients();
     this.loadCities();
   }
 
+  currentVille : string | undefined;
 
   loadPatients(): void {
-    this.http.get<Patient[]>(environment.baseUrl + "patient",
-      httpOptions).subscribe(
-        data => {
-          this.patients = data;
-          console.log(data);
-        }
-      );
+    this.ps.loadPatients().subscribe(
+      data => {
+        this.patients = data;
+        console.log(data);
+      }
+    );
   }
 
 
   loadCities(): void {
-    this.http.get<Ville[]>(environment.baseUrl + "ville", httpOptions).subscribe(data => {
+    this.ps.loadCities().subscribe(data => {
       this.villes = data;
       console.log(data);
     });
   }
 
-
-  addPatient(patient: Patient): void {
-    this.http.post<Patient>(environment.baseUrl + "patient", httpOptions).subscribe(
-      data => { this.newPatient = data;
-        this.loadPatients(); }
-    )
-  }
-
   editPatient(id?: number): void {
-    this.http.put<Patient>(environment.baseUrl + "patient/" + id, httpOptions).subscribe(data => {
+    this.ps.getPatient(id).subscribe(data => {
       this.newPatient = data;
+      this.currentVille = this.newPatient.ville?.nom;
       console.log(this.newPatient);
       //TODO: test update après edit d'un patient
       this.loadPatients();
     })
   }
 
-  // getPatient(id? : number) : void {
-  //   this.http.get<Patient>(environment.baseUrl + "patient/" + id, httpOptions).subscribe(data => {
-
-  //   })
-  // }
-
-
   deletePatient(id?: number): void {
-    this.http.delete<Patient>(environment.baseUrl + "patient", httpOptions).subscribe(data => {
+    console.log("méthode delete patient");
+    this.ps.deletePatient(id).subscribe(data => {
       this.loadPatients();
     })
   }
 
   submitForm(): void {
-    // méthode POST qui prend url + body + options (HttpHeaders)
-    console.log(this.newPatient);
-    this.http.post<Patient>(environment.baseUrl + "patient", this.newPatient, httpOptions).subscribe(
-      data => {
+    if (this.newPatient.id == undefined) {
+      this.ps.addPatient(this.newPatient).subscribe(data => {
         console.log(data);
         this.closebuttonelement.nativeElement.click();
         this.loadPatients();
-      }
-    );
+      })
+    } else {
+      this.ps.editPatient(this.newPatient).subscribe(data => {
+        console.log(data);
+        this.closebuttonelement.nativeElement.click();
+        this.loadPatients();
+      })
+    }
+
   }
 
 }
