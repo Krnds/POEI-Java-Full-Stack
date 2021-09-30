@@ -34,4 +34,17 @@ export class LoginComponent implements OnInit {
     });
   }
 
+
+  logout() {
+    this.us.logout(this.user).subscribe(data => {
+      console.log("In logout method in login component");
+        console.log(data.toString);
+        console.log(sessionStorage.getItem("connectedUser"));
+        sessionStorage.removeItem("connectedUser");
+        // sessionStorage.removeItem("username");
+        // sessionStorage.removeItem("password");
+
+      });
+  }
+
 }

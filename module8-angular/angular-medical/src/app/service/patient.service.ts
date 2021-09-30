@@ -14,30 +14,34 @@ export class PatientService {
 
   constructor(private http: HttpClient) { }
 
-  loadPatients() : Observable<Patient[]> {
-    return this.http.get<Patient[]>(environment.baseUrl + "patient", HttpOptions);
+  loadPatients(search: String): Observable<Patient[]> {
+    let searchCondition = ""
+    if (search.length > 0) {
+      searchCondition = "?search=" + search;
+    }
+    console.log("recherche des Patients");
+    return this.http.get<Patient[]>(environment.baseUrl + "patient" + searchCondition, HttpOptions);
   }
 
-  loadCities() : Observable<Ville[]> {
+  loadCities(search : String): Observable<Ville[]> {
     return this.http.get<Ville[]>(environment.baseUrl + "ville", HttpOptions)
-   }
+  }
 
-   addPatient(patient : Patient) : Observable<Patient> {
+  addPatient(patient: Patient): Observable<Patient> {
     return this.http.post<Patient>(environment.baseUrl + "patient", patient, HttpOptions);
   }
 
-   getPatient(id? : number) : Observable<Patient> {
+  getPatient(id?: number): Observable<Patient> {
     return this.http.get<Patient>(environment.baseUrl + "patient/" + id, HttpOptions);
   }
 
-  editPatient(patient : Patient) : Observable<Patient> {
-    console.log("edit patients service called");
-    return this.http.put<Patient>(environment.baseUrl + "patient/update/" + patient.id, patient, HttpOptions);
+  editPatient(patient: Patient): Observable<Patient> {
+    return this.http.put<Patient>(environment.baseUrl + "patient/" + patient.id, patient, HttpOptions);
   }
 
-  deletePatient(id? : number) : Observable<any> { //TODO: observable de patient ou any ???
+  deletePatient(id?: number): Observable<any> { //TODO: observable de patient ou any ???
     console.log("service delete patient");
 
-    return this.http.delete<Patient>(environment.baseUrl + "patient/delete/" + id, HttpOptions);
+    return this.http.delete<Patient>(environment.baseUrl + "patient/" + id, HttpOptions);
   }
 }

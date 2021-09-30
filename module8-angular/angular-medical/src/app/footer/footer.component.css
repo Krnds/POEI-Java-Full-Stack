@@ -1,0 +1,11 @@
+footer {
+    margin-top: auto;
+}
+
+.text-center p-1 position-sticky {
+    background-color: rgba(0, 0, 0, 0.05);
+    clear: both;
+    position: relative;
+    height: 200px;
+    margin-top: -200px;
+}

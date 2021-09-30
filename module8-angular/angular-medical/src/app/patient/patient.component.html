@@ -1,5 +1,10 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
+<div class="input-group mb-3 clearfix">
+    <input type="text" [(ngModel)]="search" class="form-control" placeholder="Rechercher un patient" aria-describedby="basic-addon1">
+    <button class="btn btn-outline-success my-2 my-sm-0" type="button" (click)="loadPatients()">Search</button>
+</div>
+
 <body>
     <div class="alert alert-sucess" *ngIf="success">Opération effectuée avec succès</div>
     <h3 class="text-center my-3">Liste des patients</h3>
@@ -113,7 +118,7 @@
     <!-- Modal for updating a patient -->
     <div class="modal fade" id="editPatientModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
         <div class="modal-dialog">
-            <form name="editPatientForm" method="POST" (submit)="submitForm()">
+            <form name="editPatientForm" method="POST" (submit)="submitForm()" onclick="$('.modal').modal('hide')">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title center" id="exampleModalLabel">Modifier un patient</h5>

@@ -27,9 +27,10 @@ export class PatientComponent implements OnInit {
   }
 
   currentVille : string | undefined;
+  search : String  = "" ;
 
   loadPatients(): void {
-    this.ps.loadPatients().subscribe(
+    this.ps.loadPatients(this.search).subscribe(
       data => {
         this.patients = data;
         console.log(data);
@@ -39,7 +40,7 @@ export class PatientComponent implements OnInit {
 
 
   loadCities(): void {
-    this.ps.loadCities().subscribe(data => {
+    this.ps.loadCities(this.search).subscribe(data => {
       this.villes = data;
       console.log(data);
     });
@@ -63,15 +64,12 @@ export class PatientComponent implements OnInit {
   submitForm(): void {
     if (this.newPatient.id == undefined) {
       this.ps.addPatient(this.newPatient).subscribe(data => {
-        console.log(data);
         this.closebuttonelement.nativeElement.click();
         this.loadPatients();
         this.success = true;
       })
     } else {
       this.ps.editPatient(this.newPatient).subscribe(data => {
-        console.log("submit form si id reconnu");
-        console.log(data);
         this.closebuttonelement.nativeElement.click();
         this.loadPatients();
         this.success = true;

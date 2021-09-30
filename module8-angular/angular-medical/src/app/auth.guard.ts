@@ -17,8 +17,16 @@ export class AuthGuard implements CanActivate {
     if (sessionStorage.getItem("connectedUser"))
       return true;
 
+      // if user not connected, redirect them to the login route
     this.router.navigate(['login']);
     return false;
+  }
+
+  isConnected() : Boolean {
+    if( sessionStorage.getItem( "connectedUser" ) )
+      return true;
+    else
+      return false;
   }
 
 }

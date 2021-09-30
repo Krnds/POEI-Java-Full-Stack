@@ -38,7 +38,7 @@ export class VilleComponent implements OnInit {
   }
 
   deleteCity(id?: number): void {
-    if (confirm ("etes vous surs ?")) {
+    if (confirm ("Etes-vous sûrs de vouloir supprimer ?")) {
       this.vs.deleteVille(id).subscribe(data => {
         this.loadCities();
       })
@@ -62,6 +62,10 @@ export class VilleComponent implements OnInit {
       })
     }
 
+  }
+
+   onSave() {
+    this.closebuttonelement.nativeElement.click();
   }
 
 }

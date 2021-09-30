@@ -8,9 +8,13 @@ import { HttpOptions } from '../config';
 })
 export class UserService {
 
-  constructor(private http : HttpClient) { }
+  constructor(private http: HttpClient) { }
 
-  authenticate(user : any) {
+  authenticate(user: any) {
     return this.http.post<any>(environment.baseUrl + "login", user, HttpOptions);
+  }
+
+  logout(user: any) {
+    return this.http.get(environment.baseUrl + "logout", HttpOptions);
   }
 }
