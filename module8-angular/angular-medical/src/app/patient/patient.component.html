@@ -1,7 +1,8 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 <div class="input-group mb-3 clearfix">
-    <input type="text" [(ngModel)]="search" class="form-control" placeholder="Rechercher un patient" aria-describedby="basic-addon1">
+    <input type="text" [(ngModel)]="search" class="form-control" placeholder="Rechercher un patient"
+        aria-describedby="basic-addon1">
     <button class="btn btn-outline-success my-2 my-sm-0" type="button" (click)="loadPatients()">Search</button>
 </div>
 
@@ -16,9 +17,10 @@
         </button>
     </div>
     <!-- Modal for adding a new patient -->
-    <div class="modal fade" id="patientModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
+    <div class="modal fade" id="patientModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+        data-bs-backdrop="static">
         <div class="modal-dialog">
-            <form name="patientForm" method="POST" (submit)="submitForm()">
+            <form name="patientForm" method="POST" (submit)="submitForm()" novalidate>
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title center" id="exampleModalLabel">Ajouter un patient</h5>
@@ -33,9 +35,10 @@
                                     required [(ngModel)]="newPatient.nom">
                                 <label for="lastname">Nom*</label>
                                 <!-- TODO: custom messages pour la validation -->
-                                <!-- <div class="invalid-feedback">
-                                    Please choose a username.
-                                  </div> -->
+                                <div class="invalid-feedback">
+                                    Veuillez choisir un nom.
+                                </div>
+
                             </div>
                             <div class="form-group form-floating mb-3">
                                 <input class="form-control" id="firstname" name="prenom" type="text"
@@ -116,9 +119,10 @@
     </div>
 
     <!-- Modal for updating a patient -->
-    <div class="modal fade" id="editPatientModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
+    <div class="modal fade" id="editPatientModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+        data-bs-backdrop="static">
         <div class="modal-dialog">
-            <form name="editPatientForm" method="POST" (submit)="submitForm()" onclick="$('.modal').modal('hide')">
+            <form name="editPatientForm" method="POST" (submit)="submitForm()">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title center" id="exampleModalLabel">Modifier un patient</h5>
@@ -129,8 +133,8 @@
                     <div class="modal-body">
                         <div class="form-row">
                             <div class="form-group form-floating mb-3">
-                                <input class="form-control" id="lastname" name="nom" type="text"
-                                    placeholder="Nom" required [(ngModel)]="newPatient.nom">
+                                <input class="form-control" id="lastname" name="nom" type="text" placeholder="Nom"
+                                    required [(ngModel)]="newPatient.nom">
                                 <label for="lastname">Nom*</label>
                                 <!-- TODO: custom messages pour la validation -->
                                 <!-- <div class="invalid-feedback">

@@ -1,0 +1,94 @@
+<div *ngIf="success" class="alert-sucess"></div>
+<div *ngIf="error" class="alert-error"></div>
+<div class="container">
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Numéro Patient</th>
+                <th>Nom Patient</th>
+                <th>Date du RDV</th>
+                <th>Type de RDV</th>
+                <th>Durée du RDV (minutes)</th>
+                <th>Notes sur le RDV</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let r of rdv">
+                <td>{{r.id}}</td>
+                <td>{{r.patient?.id}}</td>
+                <td>{{r.patient?.nom}}</td>
+                <td>{{r.dateheure}}</td>
+                <td>{{r.type}}</td>
+                <td>{{r.duree}}</td>
+                <td>{{r.note}}</td>
+                <td>
+                    <a class="icon" (click)="editRdv(r.id)" data-bs-toggle="modal" data-bs-target="#editRDVModal">
+                        <span class="material-icons">edit</span>
+                    </a>
+                </td>
+                <td>
+                    <a class="icon" (click)="deleteRdv(r.id)">
+                        <span class="material-icons">delete</span>
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- Modal for editing an appointment -->
+<div class="modal fade" id="editRDVModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+    data-bs-backdrop="static">
+    <div class="modal-dialog">
+        <form name="rdvForm" (submit)="submitForm()" method="POST">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title center" id="exampleModalLabel">Modifier un Rendez-vous</h5>
+                    <!-- Le #closebutton sert à la requête viewChild de cet élément : -->
+                    <button type="button" #closebutton class="btn-close" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-row">
+                        <div class="form-group form-floating mb-3">
+                            <input class="form-control" type="number" name="idPatient" placeholder="ID patient" required
+                                [(ngModel)]="newRdv.patient">
+                            <label>ID du Patient*</label>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group form-floating mb-3">
+                            <input class="form-control" type="datetime-local" name="date"
+                                placeholder="Date et heure du rdv" required [(ngModel)]="newRdv.dateheure">
+                            <label>Date du rdv*</label>
+                        </div>
+                        <div class="form-group form-floating mb-3">
+                            <input class="form-control" type="text" name="type" placeholder="Type de RDV" required
+                                [(ngModel)]="newRdv.type">
+                            <label>Type*</label>
+                        </div>
+                        <div class="form-group form-floating mb-3">
+                            <input class="form-control" type="number" name="duree" placeholder="Durée du RDV" required
+                                [(ngModel)]="newRdv.duree">
+                            <label>Durée du RDV (en minutes)*</label>
+                        </div>
+                        <div class="form-group form-floating mb-3">
+                            <input class="form-control" type="text" name="note" placeholder="Notes sur le RDV" required
+                                [(ngModel)]="newRdv.note">
+                            <label>Notes*</label>
+                        </div>
+
+                    </div>
+
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
