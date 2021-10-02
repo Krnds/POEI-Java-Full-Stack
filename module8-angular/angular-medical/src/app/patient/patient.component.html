@@ -1,20 +1,25 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-<div class="input-group mb-3 clearfix">
-    <input type="text" [(ngModel)]="search" class="form-control" placeholder="Rechercher un patient"
-        aria-describedby="basic-addon1">
-    <button class="btn btn-outline-success my-2 my-sm-0" type="button" (click)="loadPatients()">Search</button>
+<div class="alert alert-sucess" role="alert" *ngIf="success">Opération effectuée avec succès</div>
+<div class="alert alert-error" role="alert" *ngIf="error">L'action n'a pas été réalisée</div>
+<h3 class="text-center my-3 mb-5 text-uppercase">Liste des patients</h3>
+
+<div class="d-flex justify-content-around">
+<div class="input-group sm mb-3 clearfix w-25">
+    <input type="text" [(ngModel)]="search" class="form-control" placeholder="Rechercher un patient" aria-describedby="basic-addon1">
+    <button class="btn btn-outline-info my-2 my-sm-0" type="button" (click)="loadPatients()">
+                <span class="material-icons-outlined">search</span></button>
+</div>
+<button type="button" class="btn btn-outline-info m-2" data-bs-toggle="modal" data-bs-target="#patientModal">
+    Ajouter patient
+</button>
 </div>
 
 <body>
-    <div class="alert alert-sucess" *ngIf="success">Opération effectuée avec succès</div>
-    <h3 class="text-center my-3">Liste des patients</h3>
 
     <!-- Button trigger modal -->
-    <div class="d-inline-flex justify-content-center">
-        <button type="button" class="btn btn-outline-info m-2" data-bs-toggle="modal" data-bs-target="#patientModal">
-            Ajouter patient
-        </button>
+    <div class="d-flex justify-content-center">
+
     </div>
     <!-- Modal for adding a new patient -->
     <div class="modal fade" id="patientModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
@@ -61,7 +66,7 @@
                             <div class="form-group form-floating mb-3">
                                 <select class="form-select" required name="ville" name="ville" id="ville"
                                     [(ngModel)]="newPatient.ville">
-                                    <option value="">Choisissez la ville</option>
+                                    <option value="" selected>Choisissez la ville</option>
                                     <option *ngFor="let ville of villes" [ngValue]="ville">{{ville.nom}}</option>
                                 </select>
                             </div>

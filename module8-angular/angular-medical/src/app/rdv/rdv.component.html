@@ -1,5 +1,18 @@
-<div *ngIf="success" class="alert-sucess"></div>
-<div *ngIf="error" class="alert-error"></div>
+<div class="alert alert-sucess" *ngIf="success">Opération effectuée avec succès</div>
+<div class="alert alert-error" *ngIf="error">L'action n'a pas été réalisée</div>
+<h3 class="text-center my-3 mb-5 text-uppercase">Liste des rendez-vous</h3>
+
+<div class="d-flex justify-content-around">
+    <!-- <div class="input-group sm mb-3 clearfix w-25">
+    <input type="text" [(ngModel)]="search" class="form-control" placeholder="Rechercher une ville" aria-describedby="basic-addon1">
+    <button class="btn btn-outline-info my-2 my-sm-0" type="button" (click)="loadPatients()">
+                <span class="material-icons-outlined">search</span></button>
+</div> -->
+    <button type="button" class="btn btn-outline-info m-2 mb-3" data-bs-toggle="modal" data-bs-target="#addRDVModal">
+        Ajouter un rendez-vous
+        <!-- TODO: modal ajout de la ville -->
+    </button>
+</div>
 <div class="container">
 
     <table class="table table-striped">
@@ -66,10 +79,102 @@
                                 placeholder="Date et heure du rdv" required [(ngModel)]="newRdv.dateheure">
                             <label>Date du rdv*</label>
                         </div>
+                        <div class="form-group mb-3">
+                            <div class="form-check">
+                                <input [(ngModel)]="newRdv.type" class="form-check-input" type="radio" name="typerdv"
+                                    id="flexRadioDefault1" checked value="consultation">
+                                <label class="form-check-label" for="flexRadioDefault1">
+                                    Consultation </label>
+                            </div>
+                            <div class="form-check">
+                                <input [(ngModel)]="newRdv.type" class="form-check-input" type="radio" name="typerdv"
+                                    id="flexRadioDefault1" checked value="suivi">
+                                <label class="form-check-label" for="flexRadioDefault1">
+                                    Suivi </label>
+                            </div>
+                            <div class="form-check">
+                                <input [(ngModel)]="newRdv.type" class="form-check-input" type="radio" name="typerdv"
+                                    id="flexRadioDefault1" checked value="examen">
+                                <label class="form-check-label" for="flexRadioDefault1">
+                                    Examen </label>
+                            </div>
+                        </div>
                         <div class="form-group form-floating mb-3">
-                            <input class="form-control" type="text" name="type" placeholder="Type de RDV" required
-                                [(ngModel)]="newRdv.type">
-                            <label>Type*</label>
+                            <input class="form-control" type="number" name="duree" placeholder="Durée du RDV" required
+                                [(ngModel)]="newRdv.duree">
+                            <label>Durée du RDV (en minutes)*</label>
+                        </div>
+                        <div class="form-group form-floating mb-3">
+                            <input class="form-control" type="text" name="note" placeholder="Notes sur le RDV" required
+                                [(ngModel)]="newRdv.note">
+                            <label>Notes*</label>
+                        </div>
+
+                    </div>
+
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Modal for adding a new appointment -->
+<div class="modal fade" id="addRDVModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+    data-bs-backdrop="static">
+    <div class="modal-dialog">
+        <form name="rdvForm" (submit)="submitForm()" method="POST">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title center" id="exampleModalLabel">Ajouter un Rendez-vous</h5>
+                    <button type="button" #closebutton class="btn-close" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- <div class="form-row">
+                        <div class="form-group form-floating mb-3">
+                            <input class="form-control" type="number" name="idPatient" placeholder="ID patient" required
+                                [(ngModel)]="newRdv.patient">
+                            <label>ID du Patient*</label>
+                        </div>
+                    </div> -->
+                    <!-- TODO: faut mettre le choix déroulant du patient dans Ville-details component (moi details)... :/ -->
+                    <!-- <div class="form-group form-floating mb-3">
+                        <label for="patient" class="form-label">Patient</label>
+                        <select name="patient" id="patient" required class="form-select" [(ngModel)]="newRdv.patient" [compareWith]="checkPatient">
+                            <option value="" selected>Sélectionner patient</option>
+                            <option *ngFor="let patient of patients" [ngValue]="patient">
+                                {{patient.prenom}}  {{patient.nom}}
+                            </option>
+                        </select>
+                    </div> -->
+                    <div class="form-row">
+                        <div class="form-group form-floating mb-3">
+                            <input class="form-control" type="datetime-local" name="date"
+                                placeholder="Date et heure du rdv" required [(ngModel)]="newRdv.dateheure">
+                            <label>Date du rdv*</label>
+                        </div>
+                        <div class="form-group mb-3">
+                            <div class="form-check">
+                                <input [(ngModel)]="newRdv.type" class="form-check-input" type="radio" name="typerdv"
+                                    id="flexRadioDefault1" checked value="consultation">
+                                <label class="form-check-label" for="flexRadioDefault1">
+                                    Consultation </label>
+                            </div>
+                            <div class="form-check">
+                                <input [(ngModel)]="newRdv.type" class="form-check-input" type="radio" name="typerdv"
+                                    id="flexRadioDefault1" checked value="suivi">
+                                <label class="form-check-label" for="flexRadioDefault1">
+                                    Suivi </label>
+                            </div>
+                            <div class="form-check">
+                                <input [(ngModel)]="newRdv.type" class="form-check-input" type="radio" name="typerdv"
+                                    id="flexRadioDefault1" checked value="examen">
+                                <label class="form-check-label" for="flexRadioDefault1">
+                                    Examen </label>
+                            </div>
                         </div>
                         <div class="form-group form-floating mb-3">
                             <input class="form-control" type="number" name="duree" placeholder="Durée du RDV" required

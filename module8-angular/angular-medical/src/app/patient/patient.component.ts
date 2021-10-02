@@ -16,6 +16,9 @@ export class PatientComponent implements OnInit {
   villes: Array<Ville> = [];
   @ViewChild('closebutton') closebuttonelement: any;
   success: boolean = false;
+  error: boolean = false;
+  currentVille: string | undefined;
+  search: String = "";
 
   constructor(private ps: PatientService) { }
 
@@ -24,9 +27,6 @@ export class PatientComponent implements OnInit {
     this.loadPatients();
     this.loadCities();
   }
-
-  currentVille : string | undefined;
-  search : String  = "" ;
 
   loadPatients(): void {
     this.ps.loadPatients(this.search).subscribe(
@@ -55,9 +55,16 @@ export class PatientComponent implements OnInit {
   }
 
   deletePatient(id?: number): void {
-    this.ps.deletePatient(id).subscribe(data => {
-      this.loadPatients();
-    })
+    if (confirm("Voulez-vous vraiment supprimer ce patient ?")) {
+      this.ps.deletePatient(id).subscribe(data => {
+        this.loadPatients();
+        this.success = true;
+      },
+        error => {
+          this.success = false;
+          this.error = true;
+        });
+    }
   }
 
   submitForm(): void {
@@ -77,7 +84,7 @@ export class PatientComponent implements OnInit {
 
   }
 
-  comparePatientCity(v1 : Ville, v2 : Ville): boolean {
+  comparePatientCity(v1: Ville, v2: Ville): boolean {
     return v1 != undefined && v2 != undefined && v1.id == v2.id;
   }
 

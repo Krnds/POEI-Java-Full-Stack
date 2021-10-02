@@ -12,8 +12,12 @@ export class VilleService {
 
   constructor(private http: HttpClient) { }
 
-  loadCities() : Observable<Ville[]> {
-    return this.http.get<Ville[]>(environment.baseUrl + "ville", HttpOptions)
+  loadCities(search : String) : Observable<Ville[]> {
+    let query = "";
+    if (search.length > 0) {
+      query = "?search=" + search;
+    }
+    return this.http.get<Ville[]>(environment.baseUrl + "ville" + query, HttpOptions)
    }
 
    addVille(ville : Ville) : Observable<Ville> {

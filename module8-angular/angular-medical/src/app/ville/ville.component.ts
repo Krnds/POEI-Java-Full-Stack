@@ -14,6 +14,9 @@ export class VilleComponent implements OnInit {
   nom : string = ""
   newVille : Ville = new Ville();
   @ViewChild ('closebutton') closebuttonelement : any;
+  success : boolean = false;
+  error : boolean = false;
+  search : String = "";
 
   constructor( private vs : VilleService ) { }
 
@@ -22,7 +25,8 @@ export class VilleComponent implements OnInit {
   }
 
   loadCities(): void {
-    this.vs.loadCities().subscribe(data => {
+    console.log(this.search);
+    this.vs.loadCities(this.search).subscribe(data => {
       this.villes = data;
       console.log(data);
     });
@@ -65,6 +69,8 @@ export class VilleComponent implements OnInit {
   }
 
    onSave() {
+     console.log("on save called");
+     
     this.closebuttonelement.nativeElement.click();
   }
 
